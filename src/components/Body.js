@@ -9,10 +9,36 @@ const Body = () => {
 
   async function deleteValue(ide) {
     try {
-      const response = await fetch("http://localhost:3000/tasks/" + ide, {
+      await fetch("http://localhost:3000/tasks/" + ide, {
         method: "DELETE",
       });
-      setData(data.filter((a)=>a.id != ide));
+    } catch (err) {
+      console.log(err);
+    }
+    const newarr = data.filter((a) => a.id != ide);
+    newarr.map((items, index)=>{
+      items.id = index;
+    })
+    setData(newarr);
+  }
+
+  const update = (id, tit, des) => {
+    const upData = data;
+    upData[id].title=tit;
+    upData[id].description = des;
+    setData(upData);
+    updateValue(id);
+  };
+
+  async function updateValue(ide) {
+    try {
+      await fetch("http://localhost:3000/tasks/" + ide, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data[ide]),
+      });
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +47,7 @@ const Body = () => {
   const getValue = async () => {
     console.log(click);
     setClick((preClick) => !preClick);
-    setData([...data, { title: title, description: desc }]);
+    setData([...data, { id: data.length, title: title, description: desc }]);
     try {
       const response = await fetch("http://localhost:3000/tasks", {
         method: "POST",
@@ -58,16 +84,22 @@ const Body = () => {
       <input
         type="text"
         placeholder="enter title"
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
         type="text"
         placeholder="enter description"
+        value={desc}
         onChange={(e) => setDesc(e.target.value)}
       />
       <input type="button" onClick={getValue} value="create" />
-      {data.map((item, index)=>{
-        return <CreateTodo key={index} todo={data[index]} delete={deleteValue} />
+      {data.map((item,index) => {
+        return (
+          <>
+            <CreateTodo key={index} id={index} todo={item} delete={deleteValue} update={update}/>
+          </>
+        );
       })}
     </>
   );
