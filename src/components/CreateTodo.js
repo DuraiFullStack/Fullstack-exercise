@@ -4,16 +4,15 @@ const CreateTodo = (props) => {
   const [tit, setTit] = useState("");
   const [des, setDes] = useState("");
   const [appear, setAppear] = useState(false);
-
   return (
     <>
-      <div id={props.todo.id}>
+      <div id={props.todo._id}>
         <h1>{props.todo.title}</h1>
         <h2>{props.todo.description}</h2>
         <input
           type="button"
           value="delete"
-          onClick={() => props.delete(props.todo.id)}
+          onClick={() => props.delete(props.todo._id)}
         />
         {!appear && (
           <input type="button" value="edit" onClick={() => setAppear(true)} />
@@ -34,7 +33,7 @@ const CreateTodo = (props) => {
               type="button"
               value="conform"
               onClick={() => {
-                props.update(props.id, tit, des);
+                props.update(props.todo._id, tit, des);
                 setAppear(false);
               }}
             />

@@ -5,7 +5,6 @@ const Body = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [data, setData] = useState([]);
-  const [click, setClick] = useState(true);
 
   async function deleteValue(ide) {
     try {
@@ -15,11 +14,7 @@ const Body = () => {
     } catch (err) {
       console.log(err);
     }
-    const newarr = data.filter((a) => a.id != ide);
-    newarr.map((items, index)=>{
-      items.id = index;
-    })
-    setData(newarr);
+    fetchData();
   }
 
   const update = (id, tit, des) => {
@@ -45,9 +40,6 @@ const Body = () => {
   }
 
   const getValue = async () => {
-    console.log(click);
-    setClick((preClick) => !preClick);
-    setData([...data, { id: data.length, title: title, description: desc }]);
     try {
       const response = await fetch("http://localhost:3000/tasks", {
         method: "POST",
@@ -58,7 +50,11 @@ const Body = () => {
           title: title,
           description: desc,
         }),
-      });
+      }).then((response)=> response.json())
+        .then((dbData)=>{
+          setData([...data, dbData]);
+        });
+        console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -97,7 +93,7 @@ const Body = () => {
       {data.map((item,index) => {
         return (
           <>
-            <CreateTodo key={index} id={index} todo={item} delete={deleteValue} update={update}/>
+            <CreateTodo key={index} todo={item} delete={deleteValue} update={update}/>
           </>
         );
       })}
