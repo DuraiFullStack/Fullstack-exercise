@@ -1,0 +1,56 @@
+body{
+    max-width: 1400px;
+    min-height: 550px;
+    background-color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0px auto;
+}
+
+#root > input{
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    margin: 0px;
+}
+
+.navbar a{
+    padding-right: 10px;
+}
+
+.navbar div{
+    align-content: center;
+    padding: 1rem
+}
+
+.todoArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo{
+    max-width: 20rem;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputCard{
+    z-index: 2;
+    max-width: 400;
+    min-height: 300;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
