@@ -7,8 +7,8 @@ const Navbar = () => {
     const removeUser = () => {
         localStorage.removeItem("user");
         dispatch({ type: "LOGOUT" });
-    };
-    
+    }
+    //
     return (
         <>
             {user && <Navigate to="/tasks" />}
