@@ -61,7 +61,11 @@ const CreateTodo = (props) => {
                         className="defaultBtn "
                         type="button"
                         value="edit"
-                        onClick={() => setAppear(true)}
+                        onClick={() => {
+                            setAppear(true);
+                            setTit(props.todo.title);
+                            setDes(props.todo.description)
+                        }}
                     />
                 </div>
                 {appear && (
@@ -70,13 +74,13 @@ const CreateTodo = (props) => {
                             <input
                                 className="input"
                                 type="text"
-                                placeholder="enter title"
+                                value={tit}
                                 onChange={(e) => setTit(e.target.value)}
                             />
                             <input
                                 className="input"
                                 type="text"
-                                placeholder="enter description"
+                                value={des}
                                 onChange={(e) => setDes(e.target.value)}
                             />
                             <input
