@@ -13,11 +13,10 @@ const Navbar = () => {
         <>
             {user && <Navigate to="/tasks" />}
             {!user && <Navigate to="/login" />}
-            <div className="navbar">
+            <nav>
                 <h1>totoList</h1>
                 {user && (
                     <div>
-                        <Link to="/tasks">{user.email}</Link>
                         <button onClick={removeUser}>Log out</button>
                     </div>
                 )}
@@ -27,7 +26,7 @@ const Navbar = () => {
                         <Link to="/signup">Sign Up</Link>
                     </div>
                 )}
-            </div>
+            </nav>
             <Outlet />
         </>
     );

@@ -5,8 +5,8 @@ const CreateTodo = (props) => {
     const [tit, setTit] = useState("");
     const [des, setDes] = useState("");
     const [appear, setAppear] = useState(false);
-    const {user} = useAuthContext()
-//
+    const { user } = useAuthContext();
+    //
     async function deleteValue(ide) {
         try {
             await fetch("http://localhost:3000/tasks/" + ide, {
@@ -45,10 +45,11 @@ const CreateTodo = (props) => {
             <div className="todo" id={props.todo._id}>
                 <div className="face1">
                     <h1>{props.todo.title}</h1>
+                    <p>{props.todo.description}</p>
                 </div>
                 <div className="face2">
-                    <p>{props.todo.description}</p>
                     <input
+                        className="defaultBtn "
                         type="button"
                         value="delete"
                         onClick={() => {
@@ -56,28 +57,30 @@ const CreateTodo = (props) => {
                             console.log(props.key);
                         }}
                     />
-                    {!appear && (
-                        <input
-                            type="button"
-                            value="edit"
-                            onClick={() => setAppear(true)}
-                        />
-                    )}
+                    <input
+                        className="defaultBtn "
+                        type="button"
+                        value="edit"
+                        onClick={() => setAppear(true)}
+                    />
                 </div>
                 {appear && (
-                    <>
-                        <div className="inputCard">
+                    <div className="inputCard">
+                        <div className="box">
                             <input
+                                className="input"
                                 type="text"
                                 placeholder="enter title"
                                 onChange={(e) => setTit(e.target.value)}
                             />
                             <input
+                                className="input"
                                 type="text"
                                 placeholder="enter description"
                                 onChange={(e) => setDes(e.target.value)}
                             />
                             <input
+                                className="defaultBtn btn"
                                 type="button"
                                 value="conform"
                                 onClick={() => {
@@ -85,8 +88,14 @@ const CreateTodo = (props) => {
                                     setAppear(false);
                                 }}
                             />
+                            <input
+                                className="defaultBtn btn-close"
+                                type="button"
+                                onClick={() => setAppear(false)}
+                                value="X"
+                            />
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
         </>
