@@ -8,36 +8,28 @@ const CreateTodo = (props) => {
     const { user } = useAuthContext();
     //
     async function deleteValue(ide) {
-        try {
-            await fetch("http://localhost:3000/tasks/" + ide, {
-                method: "DELETE",
-                headers: {
-                    authorization: `Bearer ${user.token}`,
-                },
-            });
-        } catch (err) {
-            console.log(err);
-        }
+        await fetch("http://localhost:3000/tasks/" + ide, {
+            method: "DELETE",
+            headers: {
+                authorization: `Bearer ${user.token}`,
+            },
+        });
         props.fetch();
     }
 
     async function updateValue(ide, tit, des) {
-        try {
-            await fetch("http://localhost:3000/tasks/" + ide, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${user.token}`,
-                },
-                body: JSON.stringify({
-                    title: tit,
-                    description: des,
-                }),
-            });
-            props.fetch();
-        } catch (err) {
-            console.log(err);
-        }
+        await fetch("http://localhost:3000/tasks/" + ide, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${user.token}`,
+            },
+            body: JSON.stringify({
+                title: tit,
+                description: des,
+            }),
+        });
+        props.fetch();
     }
 
     return (
@@ -54,7 +46,6 @@ const CreateTodo = (props) => {
                         value="delete"
                         onClick={() => {
                             deleteValue(props.todo._id);
-                            console.log(props.key);
                         }}
                     />
                     <input

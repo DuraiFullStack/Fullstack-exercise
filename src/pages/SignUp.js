@@ -22,12 +22,7 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        try {
-            await signup(email, password)
-        }
-        catch (err) {
-            console.log(err)
-        }
+        await signup(email, password);
     }
 
     return (

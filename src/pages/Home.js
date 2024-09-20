@@ -8,7 +8,7 @@ const Home = () => {
     const [data, setData] = useState([]);
     const [appear, setAppear] = useState(false);
     const [error, setError] = useState(null);
-    const { user } = useAuthContext();
+    const { user, dispatch } = useAuthContext();
 
     const getValue = async () => {
         const response = await fetch("http://localhost:3000/tasks", {
@@ -29,8 +29,6 @@ const Home = () => {
             setDesc(null);
             setAppear(false);
             setError(null);
-            
-            console.log(json);
         }
         if (!response.ok) {
             setError(json.error)
@@ -38,17 +36,21 @@ const Home = () => {
     };
 
     const fetchData = async () => {
-        try {
-            const response = await fetch("http://localhost:3000/tasks", {
-                headers: {
-                    authorization: `Bearer ${user.token}`,
-                },
-            });
-            const jsonData = await response.json();
-            setData(jsonData);
-        } catch (err) {
-            console.log(err);
+        const response = await fetch("http://localhost:3000/tasks", {
+            headers: {
+                authorization: `Bearer ${user.token}`,
+            },
+        });
+
+        if (!response.ok) {
+            if(response.status == 401){
+                localStorage.removeItem('user')
+                dispatch({type: "LOGOUT"})
+            }
         }
+
+        const jsonData = await response.json();
+        setData(jsonData);
     };
     useEffect(() => {
         if (user) {
