@@ -10,7 +10,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import { AuthContextProvider } from "./context/authContext";
-import "./index.css";
+import "../index.css";
 
 const appRouter = createBrowserRouter([
     {
