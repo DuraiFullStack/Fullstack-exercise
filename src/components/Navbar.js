@@ -14,7 +14,7 @@ const Navbar = () => {
             {user && <Navigate to="/tasks" />}
             {!user && <Navigate to="/login" />}
             <nav>
-                <h1>totoList</h1>
+                <h1>todoList</h1>
                 {user && (
                     <div>
                         <button onClick={removeUser}>Log out</button>
