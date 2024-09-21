@@ -6,9 +6,10 @@ const CreateTodo = (props) => {
     const [des, setDes] = useState("");
     const [appear, setAppear] = useState(false);
     const { user } = useAuthContext();
-    //
+    const backendURL = "https://todolist-api-9hcz.onrender.com";
+         
     async function deleteValue(ide) {
-        await fetch("http://localhost:3000/tasks/" + ide, {
+        await fetch(backendURL + "/tasks/" + ide, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${user.token}`,
@@ -18,7 +19,7 @@ const CreateTodo = (props) => {
     }
 
     async function updateValue(ide, tit, des) {
-        await fetch("http://localhost:3000/tasks/" + ide, {
+        await fetch(backendURL + "/tasks/" + ide, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

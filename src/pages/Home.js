@@ -9,9 +9,10 @@ const Home = () => {
     const [appear, setAppear] = useState(false);
     const [error, setError] = useState(null);
     const { user, dispatch } = useAuthContext();
+    const backendURL = "https://todolist-api-9hcz.onrender.com";
 
     const getValue = async () => {
-        const response = await fetch("http://localhost:3000/tasks", {
+        const response = await fetch(backendURL + "/tasks", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +37,7 @@ const Home = () => {
     };
 
     const fetchData = async () => {
-        const response = await fetch("http://localhost:3000/tasks", {
+        const response = await fetch(backendURL + "/tasks", {
             headers: {
                 authorization: `Bearer ${user.token}`,
             },
