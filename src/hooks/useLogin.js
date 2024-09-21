@@ -6,11 +6,14 @@ export const useLogin = () => {
     const {user, dispatch} = useAuthContext()
 
     const login = async (email, password) => {
-        const response = await fetch("http://localhost:3000/user/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        });
+        const response = await fetch(
+            "https://todolist-api-9hcz.onrender.com/user/login",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            }
+        );
         const json = await response.json();
 
         if (!response.ok) {
